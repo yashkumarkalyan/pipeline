@@ -13,7 +13,7 @@ phases:
       - pwd
       - echo "Setting AWS Region and IAM Role..."
       - export AWS_REGION="us-east-1"
-      - export S3_BUCKET="fraud-detectml"
+      - export S3_BUCKET="fraud-detectml1"
       - export SAGEMAKER_ROLE="arn:aws:iam::419622399030:role/service-role/AmazonSageMakerServiceCatalogProductsUseRole"
       - aws configure set region "$AWS_REGION"
       - echo "validating environdent variables..."

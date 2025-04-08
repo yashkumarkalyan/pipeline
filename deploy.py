@@ -9,7 +9,7 @@ import sys
 
 # Define AWS region and s3 details
 region = "us-east-1"
-bucket_name = "fraud-detectml"
+bucket_name = "fraud-detectml1"
 file_key = "processed-data/f1_score.json"
 
 # Define F1 Score Threshold

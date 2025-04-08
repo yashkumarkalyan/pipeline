@@ -6,7 +6,7 @@ import sys
 
 # AWS Configurations
 region = "us-east-1"
-s3_bucket = "fraud-detectml"
+s3_bucket = "fraud-detectml1"
 input_s3_path = "processed-data/test.csv"  # Original file (with Class column)
 output_s3_path = "processed-data/test_inference.csv"  # File for inference (without Class)
 batch_output_s3_path = "batch-inference-results/"

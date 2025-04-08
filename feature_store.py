@@ -17,7 +17,7 @@ role = "arn:aws:iam::419622399030:role/service-role/AmazonSageMakerServiceCatalo
 
 # Define Feature Group Name & S3 Paths
 FEATURE_GROUP_NAME = "fraud-detection-feature-store"
-BUCKET_NAME = "fraud-detectml"
+BUCKET_NAME = "fraud-detectml1"
 S3_TRAIN_DATA = f"s3://{BUCKET_NAME}/processed-data/train.csv"
 OFFLINE_STORE_PATH = f"s3://{BUCKET_NAME}/feature-store/"
 

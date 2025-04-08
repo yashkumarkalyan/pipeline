@@ -88,7 +88,7 @@ with mlflow.start_run():
     print(f"F1-score saved at: {metrics_path}")
 
     # **upload F1-score to S3 (with error handling)**
-    s3_bucket = "fraud-detectml"
+    s3_bucket = "fraud-detectml1"
     s3_key = "processed-data/f1_score.json"
 
     try:
