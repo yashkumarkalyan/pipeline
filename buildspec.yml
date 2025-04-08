@@ -1,0 +1,42 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+    commands:
+      - echo "Installing dependencies..."
+      - pip install --upgrade pip
+      - pip install boto sagemaker awscli
+  pre_build:
+    commands:
+      - ls -l
+      - pwd
+      - echo "Setting AWS Region and IAM Role..."
+      - export AWS_REGION="us-east-1"
+      - export S3_BUCKET="fraud-detectml"
+      - export SAGEMAKER_ROLE="arn:aws:iam::419622399030:role/service-role/AmazonSageMakerServiceCatalogProductsUseRole"
+      - aws configure set region "$AWS_REGION"
+      - echo "validating environdent variables..."
+      - echo "AWS Region $AWS_REGION"
+      - echo "S3 Bucket $S3_BUCKET"
+      - ls -l
+  build:
+    commands:
+      - echo "Checking if pipeline py exists..."
+      - if [ -f "pipeline.py" ]; then echo "pipeline-py found"; else echo "pipeline.py NOT found!"; exit 1; fi
+      - echo "Uploading scripts to S3..."
+      - aws s3 cp pipeline.py "s3://$S3_BUCKET/pipeline-code/"
+      - aws s3 cp train.py "s3://$S3_BUCKET/pipeline-code/"
+      - aws s3 cp data_preprocessing.py "s3://$S3_BUCKET/pipeline-code/"
+      - aws s3 cp feature_store.py "s3://$S3_BUCKET/pipeline-code/"
+      - aws s3 cp model_registry.py "s3://$S3_BUCKET/pipeline-code/"
+      - aws s3 cp deploy.py "s3://$S3_BUCKET/pipeline-code/"
+      - echo "Starting SageMaker Pipeline Execution..."
+      - python pipeline.py
+  post_build:
+    commands:
+      - echo "SageMaker pipeline execution completed!"
+      - echo "Build process finished successfully!"
+artifacts:
+  files:
+    - "**/*"
